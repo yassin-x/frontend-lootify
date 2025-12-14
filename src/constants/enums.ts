@@ -6,17 +6,35 @@ export enum RoutesNav {
 }
 
 export enum Pages {
-  // ROOT
   PRODUCTS = "products",
-  CHECKOUT = "checkout",
   OUR_US = "our-us",
-  // AUTH
+  CONTACT = "contact",
+  PRIVACY = "privacy",
+  TERMS = "terms",
   SIGNIN = "signin",
   SIGNUP = "signup",
-  // USER
+  VERIFY_ACCOUNT = "verify-account",
+  // User routes
   PROFILE = "profile",
-  // ADMIN
-  DASHBOARD = "dashboard",
+  CHECKOUT = "checkout",
+  ORDERS = "orders",
+  // Admin routes
+  PRODUCT_UPDATE = "product-update",
+  PRODUCT_CREATE = "product-create",
+  PRODUCT_DELETE = "product-delete",
+  ORDER_CREATE = "order-create",
+  ORDER_UPDATE = "order-update",
+  ORDER_DELETE = "order-delete",
+  DISCOUNTS = "discounts",
+  DISCOUNT_CREATE = "discount-create",
+  DISCOUNT_UPDATE = "discount-update",
+  DISCOUNT_DELETE = "discount-delete",
+}
+
+export enum Role {
+  USER = "USER",
+  PREMIUM = "PREMIUM",
+  ADMIN = "ADMIN",
 }
 
 export enum InputTypes {

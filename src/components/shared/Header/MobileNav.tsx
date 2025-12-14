@@ -7,14 +7,18 @@ import {
 import { MenuIcon } from "lucide-react";
 import type { LinkProp } from ".";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { useLocation } from "react-router-dom";
+import { Pages, RoutesNav } from "@/constants/enums";
+import { useAuth } from "@/features/Auth/hooks/useAuthStore";
+import { LogoutButton } from "@/features/Auth/components/LogoutButtom";
 
 interface Props {
   links: LinkProp[];
 }
 
 export default function MobileNav({ links }: Props) {
+  const { isAuth, loading } = useAuth();
   const pathname = useLocation().pathname;
   return (
     <nav className="lg:hidden">
@@ -29,7 +33,7 @@ export default function MobileNav({ links }: Props) {
                 <a
                   href={link.href}
                   className={cn(
-                    "flex items-center gap-3 text-lg font-medium text-white hover:text-green-400 transition",
+                    "flex items-center gap-3 text-lg font-medium text-muted-foreground hover:text-primary transition",
                     link.href === pathname && "text-primary"
                   )}
                 >
@@ -40,7 +44,22 @@ export default function MobileNav({ links }: Props) {
             ))}
           </ul>
           <SheetFooter>
-            <Button className="w-full">سجل الدخول</Button>
+            {loading ? (
+              <span className="text-white">Loading...</span>
+            ) : (
+              !isAuth && (
+                <a
+                  href={`/${RoutesNav.AUTH}/${Pages.SIGNIN}`}
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "block lg:hidden"
+                  )}
+                >
+                  سجل الدخول
+                </a>
+              )
+            )}
+            {isAuth && <LogoutButton className="block lg:hidden" />}
           </SheetFooter>
         </SheetContent>
       </Sheet>

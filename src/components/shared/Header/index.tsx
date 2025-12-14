@@ -8,6 +8,10 @@ import {
   LayoutGridIcon,
   type LucideProps,
 } from "lucide-react";
+import AuthButtons from "./AuthButtons";
+import UserMenu from "./UserMenu";
+import { useAuth } from "@/features/Auth/hooks/useAuthStore";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface LinkProp {
   href: string;
@@ -18,6 +22,8 @@ export interface LinkProp {
 }
 
 export default function Header() {
+  const { user, loading } = useAuth();
+  
   const links: LinkProp[] = [
     {
       href: RoutesNav.ROOT,
@@ -47,7 +53,13 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-2">
           <MobileNav links={links} />
-          <Button className="hidden lg:block">سجل الدخول</Button>
+          {loading ? (
+            <Skeleton className="h-10 w-10 rounded-full"></Skeleton>
+          ) : user ? (
+            <UserMenu align="center" />
+          ) : (
+            <AuthButtons />
+          )}
           <Button variant="outline">إتصل بنا</Button>
         </div>
       </div>

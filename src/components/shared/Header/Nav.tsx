@@ -17,7 +17,7 @@ export default function Nav({ links }: Props) {
               <a
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-green-400",
+                  "text-sm font-medium transition-colors hover:text-primary",
                   link.href === pathname
                     ? "text-primary"
                     : "text-muted-foreground"
